@@ -1,0 +1,49 @@
+{% extends 'base.html'%}
+{% block title %}
+        Django
+{% endblock %}
+
+{% block content %}
+<title>个人博客</title>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-7 col-md-offset-1 scroll">
+                {% for x in articles %}
+                <a href="/detail/{{x.id}}/">
+                    <h3>{{x.title|striptags}}</h3>
+               </a>
+                 <h6 style="color:black">作者：{{x.author}}
+                    <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                    {{x.creat_time}}</h6>
+                <p>{{x.context|striptags|truncatechars:20}}</p>
+                {% empty %}
+                 <p>-----敬请期待-----</p>
+                {% endfor %}
+            </div>
+             <div class="col-xs-6 col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><p>博客分类</p></div>
+                        <div class="panel-body">
+                              {% for x in blog_types %}
+                                <a href="/blog_type/{{x.id}}">
+                                    <li style="list-style-type:none;">{{x.type|striptags}}</li>
+                                </a>
+                                 <p>{{x.context|striptags|truncatechars:20}}</p>
+                               {% empty %}
+                                   <p>敬请期待</p>
+                                 {% endfor %}
+                         </div>
+                </div>
+                 <div class="panel panel-default ">
+                    <div class="panel-heading">
+                        广告位招租: )
+                    </div>
+                    <div class="panel-body">
+                        : )
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
